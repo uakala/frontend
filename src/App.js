@@ -9,10 +9,10 @@ function App() {
     const capture = React.useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
         setImgSrc(imageSrc)
-        console.log(imageSrc)
         fetch('https://rp7macpvyl.execute-api.us-east-1.amazonaws.com/dev/api/gpt/upload-image', {
+            headers: { 'Content-Type': 'application/json' },
             method: 'POST',
-            body: {image : imageSrc}
+            body: JSON.stringify({image : imageSrc})
         }).then(() => {
             console.log('imagen subida')
         })
